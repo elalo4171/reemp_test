@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// This widget is a stepper with icons
+/// and a counter of steps
 class StepperWidget extends StatelessWidget {
   final double _width;
   final List<Widget> _icons;
@@ -58,6 +60,8 @@ class StepperWidget extends StatelessWidget {
     );
   }
 
+  /// This method return a list of widgets
+  /// with the icons and the lines between them
   List<Widget> _iconViews() {
     var list = <Widget>[];
     _icons.asMap().forEach((i, icon) {

@@ -5,6 +5,9 @@ import 'package:reemp/modules/loding/loading_page.dart';
 import 'package:reemp/modules/welcome/welcome_page.dart';
 import 'package:reemp/routes/splash_page.dart';
 
+/// This class is the routes of the app
+/// and the navigation between the pages
+/// of the app
 Route Function(RouteSettings) get routes => (RouteSettings settings) {
       Route route;
       switch (settings.name) {

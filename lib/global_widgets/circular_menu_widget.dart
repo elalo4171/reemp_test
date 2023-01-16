@@ -6,6 +6,8 @@ import 'package:reemp/core/colors.dart';
 import 'package:reemp/global_widgets/icons_custom.dart';
 
 class CircularMenu extends StatefulWidget {
+  /// This wieget create a circular menu
+  /// with 4 circles
   const CircularMenu({
     Key? key,
     required this.sizeCircle,
@@ -25,6 +27,7 @@ class CircularMenu extends StatefulWidget {
 
 class _CircularMenuState extends State<CircularMenu>
     with TickerProviderStateMixin {
+  ///
   int positionsCircles = 1;
   int positionsCirclesSecond = 2;
   int positionsCirclesThird = 3;
@@ -49,6 +52,8 @@ class _CircularMenuState extends State<CircularMenu>
     super.initState();
   }
 
+  /// This method create the position of the circles
+  /// in the screen
   void createPositionMap() {
     final sizeScreen = widget.sizeScreen;
     final middleSreen = (sizeScreen.width - 32) / 2;
@@ -78,6 +83,9 @@ class _CircularMenuState extends State<CircularMenu>
     initPositions();
   }
 
+  /// This method init the position of the circles
+  /// in the screen
+  /// and the animation
   void initPositions() {
     _controllerFirstCircle = AnimationController(
       vsync: this,
@@ -120,6 +128,12 @@ class _CircularMenuState extends State<CircularMenu>
         .animate(_controllerFirstCircle);
   }
 
+  /// This method update the position of the circles
+  /// in the screen
+  /// and the animation
+  /// when the user change the circle
+  /// with the swipe
+  /// and the animation
   void updatePositionsAnimations() {
     _controllerFirstCircle.dispose();
     _controllerFirstCircle = AnimationController(
@@ -163,6 +177,8 @@ class _CircularMenuState extends State<CircularMenu>
         .animate(_controllerFirstCircle);
   }
 
+  /// This method move the circles to the rioht
+  /// when the user swipe to the right
   void moveToRigth() {
     if (positionsCircles == 4) {
       positionsCircles = 1;
@@ -207,6 +223,9 @@ class _CircularMenuState extends State<CircularMenu>
     _controllerFirstCircle.forward();
   }
 
+  /// This method move the circles to the left
+  /// when the user swipe to the left
+  /// and the animation
   void moveToLeft() {
     if (positionsCircles == 1) {
       positionsCircles = 4;
@@ -251,6 +270,8 @@ class _CircularMenuState extends State<CircularMenu>
     _controllerFirstCircle.forward();
   }
 
+  /// This method is called when the user
+  /// select a circle
   void onIconSelected(int index) {
     switch (circleSelected) {
       case 1:
@@ -310,6 +331,13 @@ class _CircularMenuState extends State<CircularMenu>
   Widget build(BuildContext context) {
     return GestureDetector(
       onPanUpdate: (details) {
+        /// This condition is to avoid
+        /// the animation is called
+        /// when the animation is running
+        /// and the user swipe
+        /// to the right or left
+        /// and the animation is called
+        /// again
         if (_controllerFirstCircle.isAnimating) {
           return;
         }
@@ -385,6 +413,9 @@ class _CircularMenuState extends State<CircularMenu>
   }
 }
 
+/// This class is the model
+/// to save the position of the
+/// circles
 class CirclePositionModel {
   final double left;
   final double top;
@@ -407,6 +438,10 @@ class CirclePositionModel {
   }
 }
 
+/// This is the widget that
+/// represents the circle
+/// with the icon
+/// and the animation
 class CircularOption extends StatelessWidget {
   final double size;
   final String icon;

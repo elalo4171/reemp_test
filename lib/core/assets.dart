@@ -24,4 +24,6 @@ class Assets {
   static const String logoReemp = '${_path}icon.svg';
 
   static const String disable = '${_path}disable.svg';
+
+  static const String info = '${_path}info.svg';
 }

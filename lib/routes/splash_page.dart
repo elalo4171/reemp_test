@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// This class is the splash page
+/// of the app
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
 
