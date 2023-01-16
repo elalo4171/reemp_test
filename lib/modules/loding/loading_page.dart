@@ -14,6 +14,10 @@ class LoadingPage extends StatefulWidget {
 
 class _LoadingPageState extends State<LoadingPage>
     with TickerProviderStateMixin {
+  /// This controller is used to animate the logo
+  /// of the app
+  /// The animation is a [Tween] from 200 to 250
+  /// and the [CurvedAnimation] is [Curves.easeIn]
   late AnimationController controllerAnimation;
   late Animation<double> _sizeAnimation;
   @override
@@ -49,7 +53,8 @@ class _LoadingPageState extends State<LoadingPage>
         const Duration(
           seconds: 3,
         ), () {
-      if (mounted) Navigator.pushReplacementNamed(context, "config_service_details");
+      if (mounted)
+        Navigator.pushReplacementNamed(context, "config_service_details");
     });
     super.initState();
   }
