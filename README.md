@@ -78,7 +78,8 @@ This function is used to create the position map. It is used to know where the b
 ```
 
 I created 2 methods to move the circles (moveToRogth - moveToLeft)
-    
+
+```
   void moveToRigth() {
     if (positionsCircles == 4) {
       positionsCircles = 1;
@@ -122,6 +123,7 @@ I created 2 methods to move the circles (moveToRogth - moveToLeft)
     updatePositionsAnimations();
     _controllerFirstCircle.forward();
   }
+```
 
 This methods updates the position of the circles and animates them.
 
