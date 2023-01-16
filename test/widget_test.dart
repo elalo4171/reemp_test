@@ -16,9 +16,21 @@ void main() {
     expect(find.text('2/5'), findsOneWidget);
   });
 
-  testWidgets('Expect select option', (WidgetTester tester) async {
+  testWidgets('Expect find option', (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
-    await tester.tap(find.byKey(const Key("car")));
+    var btn = find.byKey(const Key('next'));
+    expect(btn.first, isNotNull);
+  });
+
+  testWidgets('Expect enable btn', (WidgetTester tester) async {
+    await tester.pumpWidget(const MyApp());
+    var btnCar = find.byKey(const Key('car'));
+    await tester.tap(btnCar.first);
+    expect(btnCar.first, isNotNull);
+    expect(find.byKey(const Key('next')), findsOneWidget);
+    for (var i = 0; i < 4; i++) {
+      await tester.pumpAndSettle();
+    }
     var btn = tester.firstWidget<ElevatedButton>(find.byKey(const Key('next')));
     expect(btn.enabled, true);
   });
