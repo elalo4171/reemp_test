@@ -41,11 +41,11 @@ class _ConfigServicePageState extends State<ConfigServicePage> {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          body: Column(
-            children: [
-              const CustomAppbar(),
-              Expanded(
-                child: Padding(
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                const CustomAppbar(),
+                Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
@@ -113,7 +113,10 @@ class _ConfigServicePageState extends State<ConfigServicePage> {
                           fontWeight: FontWeight.w200,
                         ),
                       ),
-                      const Spacer(),
+                      // const Spacer(),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       Row(
                         children: [
                           Expanded(
@@ -152,12 +155,12 @@ class _ConfigServicePageState extends State<ConfigServicePage> {
                           ),
                         ],
                       ),
-                      const Spacer(),
+                      // const Spacer(),
                     ],
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -19,26 +19,26 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 20,
-                left: 20,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 20,
+                  left: 20,
+                ),
+                child: Row(
+                  children: const [
+                    Icon(
+                      Icons.arrow_back_ios,
+                      size: 18,
+                    ),
+                    Text("Regresar"),
+                  ],
+                ),
               ),
-              child: Row(
-                children: const [
-                  Icon(
-                    Icons.arrow_back_ios,
-                    size: 18,
-                  ),
-                  Text("Regresar"),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Column(
                   children: [
                     StepperWidget(
@@ -96,9 +96,10 @@ class _WelcomePageState extends State<WelcomePage> {
                       height: 15,
                     ),
                     Row(
-                      children: const [
-                        Expanded(
-                          child: Text(
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: const Text(
                             "Selecciona las modalidades en la que dispondrás este servicio.",
                             style: TextStyle(
                               fontSize: 16,
@@ -188,8 +189,8 @@ class _WelcomePageState extends State<WelcomePage> {
                         ),
                       ),
                     ),
-                    const Spacer(
-                      flex: 2,
+                    const SizedBox(
+                      height: 20,
                     ),
                     Row(
                       children: [
@@ -215,12 +216,12 @@ class _WelcomePageState extends State<WelcomePage> {
                         ),
                       ],
                     ),
-                    const Spacer(),
+                    // const Spacer(),
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
