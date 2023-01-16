@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:reemp/core/assets.dart';
 import 'package:reemp/core/colors.dart';
@@ -411,6 +413,7 @@ class CircularOption extends StatelessWidget {
   final double iconSize;
   final Function onTap;
   final bool isSelectd;
+  final bool isEnable;
 
   const CircularOption(
       {super.key,
@@ -418,13 +421,14 @@ class CircularOption extends StatelessWidget {
       required this.icon,
       this.iconSize = 50,
       required this.onTap,
-      this.isSelectd = false});
+      this.isSelectd = false,
+      this.isEnable = true});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        onTap();
+        if (isEnable) onTap();
       },
       child: Container(
         width: size,
@@ -441,25 +445,30 @@ class CircularOption extends StatelessWidget {
             ),
           ],
         ),
-        child: Center(
-          child: Container(
-              decoration: isSelectd
-                  ? BoxDecoration(
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: ColorsReemp.blue.withOpacity(.5),
-                          spreadRadius: 1,
-                          blurRadius: 20,
-                          offset: Offset(0, 0), // changes position of shadow
-                        ),
-                      ],
-                    )
-                  : null,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: IconsCustom(icon: icon, size: iconSize),
-              )),
+        child: Stack(
+          children: [
+            Center(
+              child: Container(
+                  decoration: isSelectd
+                      ? BoxDecoration(
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: ColorsReemp.blue.withOpacity(.5),
+                              spreadRadius: 1,
+                              blurRadius: 20,
+                              offset:
+                                  Offset(0, 0), // changes position of shadow
+                            ),
+                          ],
+                        )
+                      : null,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: IconsCustom(icon: icon, size: iconSize),
+                  )),
+            ),
+          ],
         ),
       ),
     );
