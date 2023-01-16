@@ -49,7 +49,7 @@ class _LoadingPageState extends State<LoadingPage>
         const Duration(
           seconds: 3,
         ), () {
-      if (mounted) Navigator.pushNamed(context, "config_service_details");
+      if (mounted) Navigator.pushReplacementNamed(context, "config_service_details");
     });
     super.initState();
   }
