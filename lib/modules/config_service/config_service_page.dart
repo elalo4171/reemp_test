@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reemp/core/colors.dart';
 import 'package:reemp/global_widgets/circular_menu_widget.dart';
+import 'package:reemp/global_widgets/custom_appbar.dart';
 
 class ConfigServicePage extends StatefulWidget {
   const ConfigServicePage({super.key});
@@ -42,43 +43,7 @@ class _ConfigServicePageState extends State<ConfigServicePage> {
           backgroundColor: Colors.transparent,
           body: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 20,
-                  left: 0,
-                ),
-                child: Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.arrow_back_ios,
-                            size: 18,
-                            color: Colors.white.withOpacity(.5),
-                          ),
-                          Text(
-                            "Regresar",
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(.5),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Spacer(),
-                    Text(
-                      "Cobertura de servicios",
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(.5),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              const CustomAppbar(),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),

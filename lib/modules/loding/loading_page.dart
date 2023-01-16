@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:reemp/core/assets.dart';
+import 'package:reemp/global_widgets/custom_appbar.dart';
 import 'package:reemp/global_widgets/icons_custom.dart';
 
 class LoadingPage extends StatefulWidget {
@@ -48,7 +49,7 @@ class _LoadingPageState extends State<LoadingPage>
         const Duration(
           seconds: 3,
         ), () {
-      if (mounted) Navigator.pop(context);
+      if (mounted) Navigator.pushNamed(context, "config_service_details");
     });
     super.initState();
   }
@@ -66,43 +67,7 @@ class _LoadingPageState extends State<LoadingPage>
         backgroundColor: Colors.black,
         body: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 20,
-                left: 0,
-              ),
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.arrow_back_ios,
-                          size: 18,
-                          color: Colors.white.withOpacity(.5),
-                        ),
-                        Text(
-                          "Regresar",
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(.5),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    "Cobertura de servicios",
-                    style: TextStyle(
-                      color: Colors.white.withOpacity(.5),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            const CustomAppbar(),
             Expanded(
               child: Center(
                 child:
