@@ -115,6 +115,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           IconSelectable(
+                            key: const Key("car"),
                             icon: Assets.car,
                             onSelect: (value) {
                               if (value) {
@@ -196,6 +197,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       children: [
                         Expanded(
                           child: ElevatedButton(
+                            key: const Key("next"),
                               onPressed: mods.isNotEmpty
                                   ? () {
                                       Navigator.pushNamed(
