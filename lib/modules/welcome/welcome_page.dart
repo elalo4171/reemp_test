@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reemp/core/assets.dart';
+import 'package:reemp/core/colors.dart';
 import 'package:reemp/global_widgets/icon_selectable.dart';
 import 'package:reemp/global_widgets/icons_custom.dart';
 import 'package:reemp/global_widgets/stepper_widget.dart';
@@ -12,10 +13,6 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  final double sizeCircle = 60;
-
-  final double sizeCircleSelected = 100;
-
   final List<String> mods = [];
 
   @override
@@ -70,7 +67,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           child: IconsCustom(icon: Assets.payment, size: 20),
                         ),
                       ],
-                      color: const Color(0xff5CBEF8),
+                      color: ColorsReemp.blue,
                       width: MediaQuery.of(context).size.width,
                       curStep: 2,
                     ),
@@ -206,9 +203,9 @@ class _WelcomePageState extends State<WelcomePage> {
                                   : null,
                               style: ElevatedButton.styleFrom(
                                 foregroundColor: Colors.white,
-                                backgroundColor: const Color(0xff5CBEF8),
+                                backgroundColor: ColorsReemp.blue,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15),
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 15,
@@ -219,14 +216,6 @@ class _WelcomePageState extends State<WelcomePage> {
                       ],
                     ),
                     const Spacer(),
-                    // Container(
-                    //   color: Colors.blueGrey,
-                    //   child: CircularMenu(
-                    //     sizeCircle: sizeCircle,
-                    //     sizeCircleSelected: sizeCircleSelected,
-                    //     sizeScreen: MediaQuery.of(context).size,
-                    //   ),
-                    // )
                   ],
                 ),
               ),

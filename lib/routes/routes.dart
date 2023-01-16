@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reemp/modules/config_service/config_service_page.dart';
+import 'package:reemp/modules/loding/loading_page.dart';
 import 'package:reemp/modules/welcome/welcome_page.dart';
 import 'package:reemp/routes/splash_page.dart';
 
@@ -15,6 +16,12 @@ Route Function(RouteSettings) get routes => (RouteSettings settings) {
         case "config_service":
           route = MaterialPageRoute(
             builder: (_) => const ConfigServicePage(),
+            settings: RouteSettings(name: settings.name),
+          );
+          break;
+        case "loading":
+          route = MaterialPageRoute(
+            builder: (_) => const LoadingPage(),
             settings: RouteSettings(name: settings.name),
           );
           break;

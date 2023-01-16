@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:reemp/core/assets.dart';
+import 'package:reemp/core/colors.dart';
+import 'package:reemp/global_widgets/icons_custom.dart';
 
 class CircularMenu extends StatefulWidget {
   const CircularMenu({
@@ -6,11 +9,13 @@ class CircularMenu extends StatefulWidget {
     required this.sizeCircle,
     required this.sizeCircleSelected,
     required this.sizeScreen,
+    required this.onCircleChange,
   }) : super(key: key);
 
   final double sizeCircle;
   final double sizeCircleSelected;
   final Size sizeScreen;
+  final Function(int) onCircleChange;
 
   @override
   State<CircularMenu> createState() => _CircularMenuState();
@@ -22,6 +27,8 @@ class _CircularMenuState extends State<CircularMenu>
   int positionsCirclesSecond = 2;
   int positionsCirclesThird = 3;
   int positionsCirclesFourth = 4;
+
+  int circleSelected = 3;
 
   late AnimationController _controllerFirstCircle;
   late Animation<double> _sizeAnimationFirstCircleTop;
@@ -42,7 +49,7 @@ class _CircularMenuState extends State<CircularMenu>
 
   void createPositionMap() {
     final sizeScreen = widget.sizeScreen;
-    final middleSreen = sizeScreen.width / 2;
+    final middleSreen = (sizeScreen.width - 32) / 2;
     final midleMiddleScreen = middleSreen / 2;
     final midleCircle = widget.sizeCircle / 2;
     final midleCircleSelected = widget.sizeCircleSelected / 2;
@@ -160,6 +167,7 @@ class _CircularMenuState extends State<CircularMenu>
       positionsCirclesSecond = 2;
       positionsCirclesThird = 3;
       positionsCirclesFourth = 4;
+      circleSelected = 3;
     } else {
       switch (positionsCircles) {
         case 1:
@@ -167,24 +175,28 @@ class _CircularMenuState extends State<CircularMenu>
           positionsCirclesSecond = 3;
           positionsCirclesThird = 4;
           positionsCirclesFourth = 1;
+          circleSelected = 2;
           break;
         case 2:
           positionsCircles = 3;
           positionsCirclesSecond = 4;
           positionsCirclesThird = 1;
           positionsCirclesFourth = 2;
+          circleSelected = 1;
           break;
         case 3:
           positionsCircles = 4;
           positionsCirclesSecond = 1;
           positionsCirclesThird = 2;
           positionsCirclesFourth = 3;
+          circleSelected = 4;
           break;
         case 4:
           positionsCircles = 1;
           positionsCirclesSecond = 2;
           positionsCirclesThird = 3;
           positionsCirclesFourth = 4;
+          circleSelected = 3;
           break;
         default:
       }
@@ -199,6 +211,7 @@ class _CircularMenuState extends State<CircularMenu>
       positionsCirclesSecond = 1;
       positionsCirclesThird = 2;
       positionsCirclesFourth = 3;
+      circleSelected = 4;
     } else {
       switch (positionsCircles) {
         case 1:
@@ -206,24 +219,28 @@ class _CircularMenuState extends State<CircularMenu>
           positionsCirclesSecond = 1;
           positionsCirclesThird = 2;
           positionsCirclesFourth = 3;
+          circleSelected = 2;
           break;
         case 2:
           positionsCircles = 1;
           positionsCirclesSecond = 2;
           positionsCirclesThird = 3;
           positionsCirclesFourth = 4;
+          circleSelected = 3;
           break;
         case 3:
           positionsCircles = 2;
           positionsCirclesSecond = 3;
           positionsCirclesThird = 4;
           positionsCirclesFourth = 1;
+          circleSelected = 2;
           break;
         case 4:
           positionsCircles = 3;
           positionsCirclesSecond = 4;
           positionsCirclesThird = 1;
           positionsCirclesFourth = 2;
+          circleSelected = 1;
           break;
         default:
       }
@@ -232,76 +249,127 @@ class _CircularMenuState extends State<CircularMenu>
     _controllerFirstCircle.forward();
   }
 
+  void onIconSelected(int index) {
+    switch (circleSelected) {
+      case 1:
+        if (index == 4) {
+          moveToRigth();
+        }
+        if (index == 2) {
+          moveToLeft();
+        }
+        if (index == 3) {
+          moveToRigth();
+          moveToRigth();
+        }
+        break;
+      case 2:
+        if (index == 1) {
+          moveToRigth();
+        }
+        if (index == 3) {
+          moveToLeft();
+        }
+        if (index == 4) {
+          moveToRigth();
+          moveToRigth();
+        }
+        break;
+      case 3:
+        if (index == 2) {
+          moveToRigth();
+        }
+        if (index == 4) {
+          moveToLeft();
+        }
+        if (index == 1) {
+          moveToRigth();
+          moveToRigth();
+        }
+        break;
+      case 4:
+        if (index == 3) {
+          moveToRigth();
+        }
+        if (index == 1) {
+          moveToLeft();
+        }
+        if (index == 2) {
+          moveToRigth();
+          moveToRigth();
+        }
+        break;
+      default:
+    }
+    widget.onCircleChange(circleSelected);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onHorizontalDragEnd: (details) {
+      onPanUpdate: (details) {
         if (_controllerFirstCircle.isAnimating) {
           return;
         }
-        if (details.primaryVelocity! > 0) {
+        if (details.delta.dx > 0) {
           moveToRigth();
-        } else {
+        }
+        if (details.delta.dx < 0) {
           moveToLeft();
         }
       },
-      child: SizedBox(
+      child: Container(
         height: 300,
         width: double.infinity,
+        color: Colors.transparent,
         child: Stack(
           children: [
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    if (_controllerFirstCircle.isAnimating) {
-                      return;
-                    }
-                    moveToLeft();
-                  },
-                  child: Text('Left'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_controllerFirstCircle.isAnimating) {
-                      return;
-                    }
-                    moveToRigth();
-                  },
-                  child: Text('Rigth'),
-                ),
-              ],
-            ),
             Positioned(
               left: _sizeAnimationFirstCircleLeft.value,
               top: _sizeAnimationFirstCircleTop.value,
               child: CircularOption(
-                color: Colors.red,
-                size: widget.sizeCircle,
+                size: circleSelected == 1
+                    ? widget.sizeCircleSelected
+                    : widget.sizeCircle,
+                icon: Assets.car,
+                iconSize: circleSelected == 1 ? 50 : 30,
+                onTap: () => onIconSelected(1),
               ),
             ),
             Positioned(
               left: _sizeAnimationSecondCircleLeft.value,
               top: _sizeAnimationSecondCircleTop.value,
               child: CircularOption(
-                color: Colors.blue,
-                size: widget.sizeCircle,
+                size: circleSelected == 2
+                    ? widget.sizeCircleSelected
+                    : widget.sizeCircle,
+                icon: Assets.work,
+                iconSize: circleSelected == 2 ? 50 : 30,
+                onTap: () => onIconSelected(2),
               ),
             ),
             Positioned(
               left: _sizeAnimationThirdCircleLeft.value,
               top: _sizeAnimationThirdCircleTop.value,
               child: CircularOption(
-                color: Colors.green,
-                size: widget.sizeCircle,
+                size: circleSelected == 3
+                    ? widget.sizeCircleSelected
+                    : widget.sizeCircle,
+                icon: Assets.bussines,
+                iconSize: circleSelected == 3 ? 50 : 30,
+                onTap: () => onIconSelected(3),
               ),
             ),
             Positioned(
               left: _sizeAnimationFourthCircleLeft.value,
               top: _sizeAnimationFourthCircleTop.value,
               child: CircularOption(
-                color: Colors.yellow,
-                size: widget.sizeCircle,
+                size: circleSelected == 4
+                    ? widget.sizeCircleSelected
+                    : widget.sizeCircle,
+                icon: Assets.resident,
+                iconSize: circleSelected == 4 ? 60 : 45,
+                onTap: () => onIconSelected(4),
               ),
             ),
           ],
@@ -334,21 +402,43 @@ class CirclePositionModel {
 }
 
 class CircularOption extends StatelessWidget {
-  final Color color;
   final double size;
+  final String icon;
+  final double iconSize;
+  final Function onTap;
 
-  const CircularOption({super.key, required this.color, this.size = 80});
+  const CircularOption(
+      {super.key,
+      this.size = 80,
+      required this.icon,
+      this.iconSize = 50,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        color: color,
-        shape: BoxShape.circle,
+    return GestureDetector(
+      onTap: () {
+        onTap();
+      },
+      child: Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          color: Colors.black,
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: ColorsReemp.blue.withOpacity(.5),
+              spreadRadius: 1,
+              blurRadius: 9,
+              offset: Offset(0, 0), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Center(
+          child: IconsCustom(icon: icon, size: iconSize),
+        ),
       ),
-      child: const Text("Red"),
     );
   }
 }
