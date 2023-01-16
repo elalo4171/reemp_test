@@ -115,7 +115,7 @@ class _CircularMenuState extends State<CircularMenu>
     _controllerFirstCircle.dispose();
     _controllerFirstCircle = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(milliseconds: 300),
     );
     _controllerFirstCircle.addListener(() {
       setState(() {});
@@ -236,6 +236,9 @@ class _CircularMenuState extends State<CircularMenu>
   Widget build(BuildContext context) {
     return GestureDetector(
       onHorizontalDragEnd: (details) {
+        if (_controllerFirstCircle.isAnimating) {
+          return;
+        }
         if (details.primaryVelocity! > 0) {
           moveToRigth();
         } else {
@@ -251,12 +254,18 @@ class _CircularMenuState extends State<CircularMenu>
               children: [
                 ElevatedButton(
                   onPressed: () {
+                    if (_controllerFirstCircle.isAnimating) {
+                      return;
+                    }
                     moveToLeft();
                   },
                   child: Text('Left'),
                 ),
                 ElevatedButton(
                   onPressed: () {
+                    if (_controllerFirstCircle.isAnimating) {
+                      return;
+                    }
                     moveToRigth();
                   },
                   child: Text('Rigth'),
