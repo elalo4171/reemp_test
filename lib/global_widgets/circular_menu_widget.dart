@@ -334,6 +334,7 @@ class _CircularMenuState extends State<CircularMenu>
                 icon: Assets.car,
                 iconSize: circleSelected == 1 ? 50 : 30,
                 onTap: () => onIconSelected(1),
+                isSelectd: circleSelected == 1,
               ),
             ),
             Positioned(
@@ -346,6 +347,7 @@ class _CircularMenuState extends State<CircularMenu>
                 icon: Assets.work,
                 iconSize: circleSelected == 2 ? 50 : 30,
                 onTap: () => onIconSelected(2),
+                isSelectd: circleSelected == 2,
               ),
             ),
             Positioned(
@@ -358,6 +360,7 @@ class _CircularMenuState extends State<CircularMenu>
                 icon: Assets.bussines,
                 iconSize: circleSelected == 3 ? 50 : 30,
                 onTap: () => onIconSelected(3),
+                isSelectd: circleSelected == 3,
               ),
             ),
             Positioned(
@@ -370,6 +373,7 @@ class _CircularMenuState extends State<CircularMenu>
                 icon: Assets.resident,
                 iconSize: circleSelected == 4 ? 60 : 45,
                 onTap: () => onIconSelected(4),
+                isSelectd: circleSelected == 4,
               ),
             ),
           ],
@@ -406,13 +410,15 @@ class CircularOption extends StatelessWidget {
   final String icon;
   final double iconSize;
   final Function onTap;
+  final bool isSelectd;
 
   const CircularOption(
       {super.key,
       this.size = 80,
       required this.icon,
       this.iconSize = 50,
-      required this.onTap});
+      required this.onTap,
+      this.isSelectd = false});
 
   @override
   Widget build(BuildContext context) {
@@ -436,7 +442,24 @@ class CircularOption extends StatelessWidget {
           ],
         ),
         child: Center(
-          child: IconsCustom(icon: icon, size: iconSize),
+          child: Container(
+              decoration: isSelectd
+                  ? BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: ColorsReemp.blue.withOpacity(.5),
+                          spreadRadius: 1,
+                          blurRadius: 20,
+                          offset: Offset(0, 0), // changes position of shadow
+                        ),
+                      ],
+                    )
+                  : null,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconsCustom(icon: icon, size: iconSize),
+              )),
         ),
       ),
     );

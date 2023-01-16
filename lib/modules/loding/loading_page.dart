@@ -48,7 +48,7 @@ class _LoadingPageState extends State<LoadingPage>
         const Duration(
           seconds: 3,
         ), () {
-      Navigator.pop(context);
+      if (mounted) Navigator.pop(context);
     });
     super.initState();
   }
